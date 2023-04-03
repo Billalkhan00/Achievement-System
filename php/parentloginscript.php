@@ -16,13 +16,13 @@ if(empty($password)) {
 header("Location: ../loginpage.php?error=Empty email");
 exit();
 } else {
-    $SQLquery = $conn->query("SELECT * FROM teacher_account WHERE Email_Address='$email'");
+    $SQLquery = $conn->query("SELECT * FROM parent_account WHERE Email_Address='$email'");
     if ($SQLquery->rowCount() == 1) {
         $user = $SQLquery->fetchObject();
         // This will check if the password entered is correct, if correct it will log in the user otherwise it will give an error
         if(password_verify($password, $user->Password)) {
             session_start();
-            $user -> accountType = 'teacher';
+            $user -> accountType = 'parent';
             $_SESSION['user'] = $user;
             header("Location: ../index.php");
             exit();
