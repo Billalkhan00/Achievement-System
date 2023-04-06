@@ -15,7 +15,7 @@
             <?php
             }else if ($_SESSION['user']->accountType=='teacher'){
                 ?>
-                <a href="#">Dashboard</a>
+                <a href="teacherdashboard.php">Dashboard</a>
                 <a href="php/logout.php">Logout</a>
                 <?php
             }else if ($_SESSION['user']->accountType=='student'){
