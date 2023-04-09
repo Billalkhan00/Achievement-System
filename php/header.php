@@ -20,7 +20,7 @@
                 <?php
             }else if ($_SESSION['user']->accountType=='student'){
                 ?>
-                <a href="#">Student Homepage</a>
+                <a href="studenthomepage.php">Student Homepage</a>
                 <a href="php/logout.php">Logout</a>  
                 <?php 
             }
