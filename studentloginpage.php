@@ -8,6 +8,9 @@
         <meta name="Description" content="High Achievers website for School children">
         <title>High Achievers</title>
         <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
     </head>
 
 
@@ -17,14 +20,16 @@
     include("php/header.php")
     ?>
     <form action="php/studentloginscript.php" method= "POST">
-        <h1>Login</h1>
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Please enter your email">
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Please enter your Password">
-        <a href="#">Signup</a>
-        <input type="submit" name="submit" value="Login">
-        <a href="#">Forgot your Password?</a>
+        <div id="form-container">
+        <h1>Student Login</h1>
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Please enter your email">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Please enter your Password">
+            <a href="#">Signup</a>
+            <input type="submit" name="submit" value="Login">
+            <a href="#">Forgot your Password?</a>
+        </div>
     </form>
     <?php
     include("php/footer.php")

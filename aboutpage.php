@@ -1,7 +1,5 @@
 <html>
 
-
-
     <head>
         <meta charset="utf-8">
         <meta name="Author" content="Billal Khan">
@@ -12,23 +10,14 @@
         <link rel="stylesheet" type="text/css" href="css/footer.css">
     </head>
 
-
-
     <body>
-    <?php
-    include("php/header.php")
-    ?>
-    <h1>Teacher Dashboard</h1>
-    <form action="studentsearchresults.php" method = "get" >
-        <input type="search" name = "name" placeholder = "Please enter Students Name">
-        <input type="search" name = "class" placeholder = "Please enter Students Class">
-        <input type="submit" name = "submit" value = "search">
-    </form>
-    <?php
-    include("php/footer.php")
-    ?>
+        <?php
+        include("php/header.php")
+        ?>
+        <h1>about page</h1>
+        <?php
+        include("php/footer.php")
+        ?>
     </body>
-
-
 
 </html>
