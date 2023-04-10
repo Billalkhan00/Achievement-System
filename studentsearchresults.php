@@ -8,6 +8,8 @@
         <meta name="Description" content="High Achievers website for School children">
         <title>High Achievers</title>
         <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
     </head>
 
 

@@ -1,29 +1,37 @@
 <footer>
-    <div>
+    <div id="footer-box">
         <p>Help and Support</p>
-        <a href="#">Company</a>
-        <a href="#">Legal</a>
-        <a href="#">Contact information</a>
-        <a href="#">Services</a>
+        <ul>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Contact information</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
     </div>
-    <div>
+    <div id="footer-box">
         <p>About</p>
-        <a href="#">Company</a>
-        <a href="#">Legal</a>
-        <a href="#">Contact information</a>
-        <a href="#">Services</a>
+        <ul>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Contact information</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
     </div>
-    <div>
+    <div id="footer-box">
         <p>Our Product</p>
-        <a href="#">Company</a>
-        <a href="#">Legal</a>
-        <a href="#">Contact information</a>
-        <a href="#">Services</a>
+        <ul>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Contact information</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
     </div>
-    <div>
+    <div id="footer-box">
         <p>Legal</p>
-        <a href="#">Terms and Conditions</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
+        <ul>
+            <li><a href="#">Terms and Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+        </ul>
     </div>
 </footer>

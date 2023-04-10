@@ -1,8 +1,13 @@
 <header>
-    <h1>High Achievers</h1>
-    <div>
+    <div id = title-container>
+        <div id = title-inner-container>
+            <img src="images/trophy.png" width = "50px" height = "50px">
+            <h1>High Achievers</h1>
+        </div>
+     </div>
+    <div id = "header-buttons">
         <a href="index.php">Home</a>
-        <a href="#">About</a>
+        <a href="aboutpage.php">About</a>
         <a href="#">Achievements</a>
         <a href="#">Leaderboard</a>
         <?php
