@@ -41,7 +41,7 @@
     for ($i=0;$i<count($students) ;$i++){
         $student = $students[$i];
         ?>
-        <p><?php echo $student ["First_Name"] ." ". $student ["Last_Name"] ?></p>
+        <a href="studentprofilepage.php?student=<?php echo $student ['ChildID'] ?>"><?php echo $student ["First_Name"] ." ". $student ["Last_Name"] ?></a>
         <?php
     }
     ?>
