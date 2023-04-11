@@ -9,7 +9,7 @@
         <a href="index.php">Home</a>
         <a href="aboutpage.php">About</a>
         <a href="#">Achievements</a>
-        <a href="#">Leaderboard</a>
+        <a href="leaderboardpage.php">Leaderboard</a>
         <?php
         session_start();
         if (isset ($_SESSION['user'])){
