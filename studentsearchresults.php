@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="index.css">
         <link rel="stylesheet" type="text/css" href="css/header.css">
         <link rel="stylesheet" type="text/css" href="css/footer.css">
+        <link rel="stylesheet" type="text/css" href="css/searchresults.css">
     </head>
 
 
@@ -19,6 +20,11 @@
     include("php/header.php");
     ?>
     <h1>Student Search Result</h1>
+    <table>
+        <tr>
+            <td>Student Name</td>
+            <td>Student Class</td>
+        </tr>
     <?php
     include "php/database.php";
     if (isset($_GET["name"])==FALSE && isset($_GET["class"])==FALSE){
@@ -36,15 +42,30 @@
         exit();
     }
     $userID = $_SESSION ["user"] -> TeacherID; 
-    $students = $conn -> query ("SELECT * FROM child_account WHERE First_Name LIKE '%$studentName%' OR Last_Name LIKE '%$studentName%' OR Class LIKE '%$className%'");
+    if (empty($studentName) == true) {
+        $students = $conn -> query ("SELECT * FROM child_account WHERE Class LIKE '%$className%'");
+    } else {
+        $studentNameList = explode(" ", $studentName);
+        if (count($studentNameList) > 1) {
+            $firstName = $studentNameList[0];
+            $lastName = $studentNameList[1];
+            $students = $conn -> query ("SELECT * FROM child_account WHERE First_Name LIKE '%$firstName%' OR Last_Name LIKE '%$lastName%'");
+        } else {
+            $students = $conn -> query ("SELECT * FROM child_account WHERE First_Name LIKE '%$studentName%' OR Last_Name LIKE '%$studentName%'");
+        }
+    }
     $students = $students -> fetchAll();
     for ($i=0;$i<count($students) ;$i++){
         $student = $students[$i];
         ?>
-        <a href="studentprofilepage.php?student=<?php echo $student ['ChildID'] ?>"><?php echo $student ["First_Name"] ." ". $student ["Last_Name"] ?></a>
+        <tr>
+        <td><a href="studentprofilepage.php?student=<?php echo $student ['ChildID'] ?>"><?php echo $student ["First_Name"] ." ". $student ["Last_Name"]?></a></td>
+        <td><p><?php echo $student ["Class"]?></p></td>
+        </tr>
         <?php
     }
     ?>
+    </table>
     <?php
     include("php/footer.php");
     ?>
