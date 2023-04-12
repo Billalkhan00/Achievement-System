@@ -18,7 +18,7 @@
     <?php
     include("php/header.php");
     ?>
-    <h1>Student Search Result</h1>
+    <h1>Student Profile Page</h1>
     <?php
     include "php/database.php";
     if (isset($_GET["student"])==FALSE){
@@ -57,11 +57,25 @@
 
     $achievements = $conn -> query("SELECT a.* FROM achievements AS a INNER JOIN child_achievements AS ca ON ca.ChildID = $studentID AND ca.AchievementID=a.AchievementID");
     $achievementsData = $achievements->fetchAll();
-    for($i = 0; $i< count($achievementsData); $i++) {
-        $a = $achievementsData[$i];
+    
+    $achievementsList = array();
+    for ($i = 0; $i < count($achievementsData); $i++) {
+        array_push($achievementsList, $achievementsData[$i]["AchievementID"]);
+    }
+    $countedList = array_count_values($achievementsList);
+    $countedListKeys = array_keys($countedList);
+    
+    for($i = 0; $i< count($countedList); $i++) {
 
+        $id = $countedListKeys[$i];
+        $a = $conn-> query("SELECT * FROM achievements WHERE AchievementID=$id");
+        if ($a->rowCount() == 1) {
+            $a = $a->fetchObject();
+            $reason = $a->Reason;
+            $count = $countedList[$id];
+        }
         ?>
-        <p><?php echo $a["Reason"]?></p>
+        <p><?php echo $reason . " x" .$count?></p>
     <?php
 }
     include("php/footer.php");
