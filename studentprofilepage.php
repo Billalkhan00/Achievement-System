@@ -48,7 +48,10 @@
         <p><?php echo $studentemailaddress ?></p>
         <p><?php echo $studentclass ?></p>
         <p><?php echo $studentdateofbirth ?></p>
+        <br>
         <a href="addachievementpage.php?student=<?php echo $studentID?>">Add Achievement</a>
+        <br>
+        <p>Achievements:</p>
         <?php
     } else {
         header("location: index.php");
@@ -78,6 +81,31 @@
         <p><?php echo $reason . " x" .$count?></p>
     <?php
 }
+?>
+
+<br>
+    <p>Parents Details:</p>
+    <?php
+    $parent = $conn -> query("SELECT p.* FROM parent_account AS p INNER JOIN parent_of_child AS pc ON p.ParentID=pc.ParentID AND pc.ChildID=$studentID");
+    if ($parent-> rowCount() > 0) {
+        $parentsData = $parent-> fetchAll();
+    } else {
+        $parentsData = array();
+    }
+
+    for($i = 0; $i < count($parentsData); $i++) {
+        $parentID = $parentsData[$i]["ParentID"];
+        ?>
+        <p>First Name: <?php echo $parentsData[$i]["First_Name"] ?></p>
+        <p>Last Name: <?php echo $parentsData[$i]["Last_Name"] ?></p>
+        <p>Email: <?php echo $parentsData[$i]["Email_Address"] ?></p>
+        <?php
+    }
+    ?>
+    <br>
+    <a href = "addparentpage.php?student=<?php echo $studentID ?>">Add Parent</a>
+    <a href = "php/removeparentscript.php?childID=<?php echo $studentID ?>&parentID=<?php echo $parentID?>">Remove Parent</a>
+<?php
     include("php/footer.php");
     ?>
     </body>

@@ -1,0 +1,24 @@
+table {
+    border: solid 2px black;
+    width: 100%;
+}
+tr {
+    border: solid 2px black;
+}
+td {
+    border: solid 2px black;
+}
+#table-container {
+    width: 100%;
+    display: flex;
+}
+#left-table {
+width: 100%;
+    margin: 10px
+
+}
+#right-table {
+width: 100%;
+    margin: 10px
+
+}

@@ -5,15 +5,15 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 } else {
-    header("Location: ../loginpage.php?error=no submit");
+    header("Location: ../parentloginpage.php?error=no submit");
     exit();
 }
 // This checks if the password and email is empty
 if(empty($password)) {
-    header("Location: ../loginpage.php?error=empty password");
+    header("Location: ../parentloginpage.php?error=empty password");
     exit();
 } else if (empty($email)) {
-header("Location: ../loginpage.php?error=Empty email");
+header("Location: ../parentloginpage.php?error=Empty email");
 exit();
 } else {
     $SQLquery = $conn->query("SELECT * FROM parent_account WHERE Email_Address='$email'");
@@ -28,12 +28,12 @@ exit();
             exit();
         }else{
             //These show if the password entered is incorrect if it is, it will take the user back to the log in page.
-            header("Location: ../loginpage.php?error=incorrect password");
+            header("Location: ../parentloginpage.php?error=incorrect password");
             exit();
         }
      }else {
         //These show if the email entered is incorrect if it is, it will take the user back to the log in page.
-        header("Location: ../loginpage.php?error=incorrect email");
+        header("Location: ../parentloginpage.php?error=incorrect email" . $SQLquery->rowCount());
         exit();
     }
 }
