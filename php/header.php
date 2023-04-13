@@ -15,7 +15,7 @@
         if (isset ($_SESSION['user'])){
             if ($_SESSION['user']->accountType=='parent'){
                 ?>
-                <a href="#">View Child Account</a>
+                <a href="viewchildaccountpage.php">View Child Account</a>
                 <a href="php/logout.php">Logout</a>
             <?php
             }else if ($_SESSION['user']->accountType=='teacher'){
