@@ -1,5 +1,5 @@
 
-form {
+#mainForm {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -8,14 +8,16 @@ form {
 }
 
 input {
-    height: 30px;
+    height: 40px;
     width: 100%;
     margin-bottom: 10px;
 }
 
 #form-container {
-    width: 50%;
-    background-color: rgb(102, 49, 106);
+    width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #998888;
     margin-left: 20px;
     margin-right: 20px;
 }

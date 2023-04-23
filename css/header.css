@@ -1,10 +1,13 @@
 *{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Carlito', sans-serif;
     margin: 0;
+}
+body {
+    background-color: #EADEDA;
 }
 header {
     width: 100%;
-    background-color: rgb(109, 52, 123);
+    background-color: #8A3033;
     display: block;
     margin-bottom: 10px;
 }
@@ -35,9 +38,11 @@ header {
     height: 100%;
     display: flex;
     align-items: center;
+    border-radius: 10px;
     justify-content: center;
     text-decoration: none;
-    background-color: rgb(192, 128, 34);
+    background-color: #BFB8AD;
     margin: 10px;
-    border: 3px solid black;
+    color: black;
+    font-size: 20px;
 }
