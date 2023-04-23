@@ -1,6 +1,6 @@
 footer {
     width: 100%;
-    background-color: rgb(109, 52, 123);
+    background-color: #8A3033;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -16,4 +16,21 @@ footer {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+#footer-box p{
+    font-size: 25px;
+}
+#footer-box ul a{
+    color: black;
+    text-decoration: none;
+}
+#footer-box-image {
+    width: 100%;
+    margin: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+#footer-box-image img {
+    margin-top: 10px;
 }

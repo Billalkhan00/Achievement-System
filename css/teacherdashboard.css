@@ -1,12 +1,37 @@
+#mainContainer {
+    margin-top: 30px;
+}
+#title {
+    margin-left: 20px;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+#title2 {
+    margin-left: 20px;
+}
+#searchContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#searchInnerContainer {
+    background-color: #BFB8AD;
+    border-radius: 10px;
+    padding: 30px;
+    width: 500px;
+}
 table {
     border: solid 2px black;
     width: 100%;
+    border-radius: 10px;
+    background-color: #BFB8AD;
+    padding: 30px;
 }
 tr {
     border: solid 2px black;
 }
 td {
-    border: solid 2px black;
+    /* border: solid 2px black; */
 }
 #table-container {
     width: 100%;
@@ -14,11 +39,11 @@ td {
 }
 #left-table {
 width: 100%;
-    margin: 10px
+    margin: 20px;
 
 }
 #right-table {
 width: 100%;
-    margin: 10px
+    margin: 20px;
 
 }

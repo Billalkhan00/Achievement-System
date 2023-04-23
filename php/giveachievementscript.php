@@ -13,5 +13,5 @@ if (isset($_POST["achievementID"]) == false) {
 $achievementID=$_POST["achievementID"];
 
 $conn -> query("INSERT INTO child_achievements (ChildID, AchievementID) VALUES($studentID, $achievementID)");
-header("location: ../teacherdashboard.php");
+header("location: ../studentprofilepage.php?student=$studentID");
 ?>

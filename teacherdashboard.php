@@ -125,217 +125,264 @@
        
 
         ?>
-        <h1>Teacher Dashboard</h1>
-        <form action="studentsearchresults.php" method = "get" >
-            <input type="search" name = "name" placeholder = "Please enter Students Name">
-            <input type="search" name = "class" placeholder = "Please enter Students Class">
-            <input type="submit" name = "submit" value = "search">
-        </form>
-        <br>
-        <div id="table-container">
-            <div id="left-table">
-            <h2>Most Achievements</h2>
-                <table>
-                    <tr>
-                        <td>Position</td>
-                        <td>Name</td>
-                        <td>Class</td>
-                        <td>Total Achievements</td>
-                    </tr>
-                <?php
-
-        $counter = 0;
-                for ($i = count($achievementDataKeys)-1; $i >-1 ; $i--) {
-                    $counter+= 1;
-                    if ($counter > 20) {
-                        break;
-                    }
-                    $childID=$achievementDataKeys[$i];
-
-                    $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
-
-                    if ($childData-> rowCount()==1 ) {
-                        $child = $childData-> fetchObject();
-                        $childName = $child-> First_Name;
-                        $childClass = $child-> Class;
-                        $childCount = $achievementData[$childID];
-                    }
-                    ?>
-                    <tr>
-                        <td><?php echo count($achievementData)-$i ?></td>
-                        <td><?php echo $childName ?></td>
-                        <td><?php echo $childClass ?></td>
-                        <td><?php echo $childCount ?></td>
-                    </tr>
-
-                    <?php
-                }
-                ?>
-                </table>
+        <div id="mainContainer">
+            <h1 id="title">Teacher Dashboard</h1>
+            <div id="searchContainer">
+                <div id="searchInnerContainer">
+                    <h1>Student Search</h1>
+                    <form action="studentsearchresults.php" method = "get" >
+                        <input type="search" name = "name" placeholder = "Please enter Students Name">
+                        <input type="search" name = "class" placeholder = "Please enter Students Class">
+                        <input type="submit" name = "submit" value = "search">
+                    </form>
+                </div>
             </div>
-            <div id="right-table">
-                <h2>Least Achievements</h2>
-                <table>
-                    <tr>
-                        <td>Position</td>
-                        <td>Name</td>
-                        <td>Class</td>
-                        <td>Total Achievements</td>
-                    </tr>
-                
-                <?php
+            <h1 id="title2">Student Data</h1>
+            <div id="table-container">
+                <div id="left-table">
+                <h2>Most Achievements</h2>
+                    <table>
+                        <tr>
+                            <td>Position</td>
+                            <td>Name</td>
+                            <td>Class</td>
+                            <td>Total Achievements</td>
+                        </tr>
+                    <?php
 
-                $counter = 0;
-                for ($i = 0; $i < count($achievementDataKeys) ; $i++) {
-                    $counter+= 1;
-                    if ($counter > 20) {
-                        break;
-                    }
-                    $childID=$achievementDataKeys[$i];
+            $counter = 0;
+                    for ($i = count($achievementDataKeys)-1; $i >-1 ; $i--) {
+                        $counter+= 1;
+                        if ($counter > 20) {
+                            break;
+                        }
+                        $childID=$achievementDataKeys[$i];
 
-                    $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
+                        $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
 
-                    if ($childData-> rowCount()==1 ) {
-                        $child = $childData-> fetchObject();
-                        $childName = $child-> First_Name;
-                        $childClass = $child-> Class;
-                        $childCount = $achievementData[$childID];
+                        if ($childData-> rowCount()==1 ) {
+                            $child = $childData-> fetchObject();
+                            $childName = $child-> First_Name;
+                            $childClass = $child-> Class;
+                            if($counter == 1) {
+                                $childCount = $achievementData[$childID] . "🥇";
+                            } else if ($counter == 2) {
+                                $childCount = $achievementData[$childID] . "🥈";
+                            } else if ($counter == 3) {
+                                $childCount = $achievementData[$childID] . "🥉";
+                            } else {
+                                $childCount = $achievementData[$childID] . "⭐";
+                            }
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo count($achievementData)-$i ?></td>
+                            <td><?php echo $childName ?></td>
+                            <td><?php echo $childClass ?></td>
+                            <td><?php echo $childCount ?></td>
+                        </tr>
+
+                        <?php
                     }
                     ?>
-                    <tr>
-                        <td><?php echo $i+1 ?></td>
-                        <td><?php echo $childName ?></td>
-                        <td><?php echo $childClass ?></td>
-                        <td><?php echo $childCount ?></td>
-                    </tr>
-
+                    </table>
+                </div>
+                <div id="right-table">
+                    <h2>Least Achievements</h2>
+                    <table>
+                        <tr>
+                            <td>Position</td>
+                            <td>Name</td>
+                            <td>Class</td>
+                            <td>Total Achievements</td>
+                        </tr>
+                    
                     <?php
-                }
-                ?>
-                </table>
-            </div>
-            <div id="right-table">
-                <h2>Class 6KH</h2>
-                <table>
-                    <tr>
-                        <td>Position</td>
-                        <td>Name</td>
-                        <td>Class</td>
-                        <td>Total Achievements</td>
-                    </tr>
-                
-                <?php
 
-                $counter = 0;
-                for ($i = count($achievementDataKeys2)-1; $i > -1; $i--) {
-                    $counter+= 1;
-                    if ($counter > 20) {
-                        break;
-                    }
-                    $childID=$achievementDataKeys2[$i];
+                    $counter = 0;
+                    for ($i = 0; $i < count($achievementDataKeys) ; $i++) {
+                        $counter+= 1;
+                        if ($counter > 20) {
+                            break;
+                        }
+                        $childID=$achievementDataKeys[$i];
 
-                    $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
+                        $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
 
-                    if ($childData-> rowCount()==1 ) {
-                        $child = $childData-> fetchObject();
-                        $childName = $child-> First_Name;
-                        $childClass = $child-> Class;
-                        $childCount = $achievementData2[$childID];
+                        if ($childData-> rowCount()==1 ) {
+                            $child = $childData-> fetchObject();
+                            $childName = $child-> First_Name;
+                            $childClass = $child-> Class;
+                            if($counter == 1) {
+                                $childCount = $achievementData[$childID] . "🥇";
+                            } else if ($counter == 2) {
+                                $childCount = $achievementData[$childID] . "🥈";
+                            } else if ($counter == 3) {
+                                $childCount = $achievementData[$childID] . "🥉";
+                            } else {
+                                $childCount = $achievementData[$childID] . "⭐";
+                            }
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo $i+1 ?></td>
+                            <td><?php echo $childName ?></td>
+                            <td><?php echo $childClass ?></td>
+                            <td><?php echo $childCount ?></td>
+                        </tr>
+
+                        <?php
                     }
                     ?>
-                    <tr>
-                        <td><?php echo count($achievementDataKeys2)-$i ?></td>
-                        <td><?php echo $childName ?></td>
-                        <td><?php echo $childClass ?></td>
-                        <td><?php echo $childCount ?></td>
-                    </tr>
-
+                    </table>
+                </div>
+                <div id="right-table">
+                    <h2>Class 6KH</h2>
+                    <table>
+                        <tr>
+                            <td>Position</td>
+                            <td>Name</td>
+                            <td>Class</td>
+                            <td>Total Achievements</td>
+                        </tr>
+                    
                     <?php
-                }
-                ?>
-                </table>
-            </div>
-            <div id="right-table">
-                <h2>Class 6RS</h2>
-                <table>
-                    <tr>
-                        <td>Position</td>
-                        <td>Name</td>
-                        <td>Class</td>
-                        <td>Total Achievements</td>
-                    </tr>
-                
-                <?php
 
-                $counter = 0;
-                for ($i = count($achievementDataKeys3)-1; $i > -1; $i--) {
-                    $counter+= 1;
-                    if ($counter > 20) {
-                        break;
-                    }
-                    $childID=$achievementDataKeys3[$i];
+                    $counter = 0;
+                    for ($i = count($achievementDataKeys2)-1; $i > -1; $i--) {
+                        $counter+= 1;
+                        if ($counter > 20) {
+                            break;
+                        }
+                        $childID=$achievementDataKeys2[$i];
 
-                    $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
+                        $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
 
-                    if ($childData-> rowCount()==1 ) {
-                        $child = $childData-> fetchObject();
-                        $childName = $child-> First_Name;
-                        $childClass = $child-> Class;
-                        $childCount = $achievementData3[$childID];
+                        if ($childData-> rowCount()==1 ) {
+                            $child = $childData-> fetchObject();
+                            $childName = $child-> First_Name;
+                            $childClass = $child-> Class;
+                            if($counter == 1) {
+                                $childCount = $achievementData[$childID] . "🥇";
+                            } else if ($counter == 2) {
+                                $childCount = $achievementData[$childID] . "🥈";
+                            } else if ($counter == 3) {
+                                $childCount = $achievementData[$childID] . "🥉";
+                            } else {
+                                $childCount = $achievementData[$childID] . "⭐";
+                            }
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo count($achievementDataKeys2)-$i ?></td>
+                            <td><?php echo $childName ?></td>
+                            <td><?php echo $childClass ?></td>
+                            <td><?php echo $childCount ?></td>
+                        </tr>
+
+                        <?php
                     }
                     ?>
-                    <tr>
-                        <td><?php echo count($achievementDataKeys3)-$i ?></td>
-                        <td><?php echo $childName ?></td>
-                        <td><?php echo $childClass ?></td>
-                        <td><?php echo $childCount ?></td>
-                    </tr>
-
+                    </table>
+                </div>
+                <div id="right-table">
+                    <h2>Class 6RS</h2>
+                    <table>
+                        <tr>
+                            <td>Position</td>
+                            <td>Name</td>
+                            <td>Class</td>
+                            <td>Total Achievements</td>
+                        </tr>
+                    
                     <?php
-                }
-                ?>
-                </table>
-            </div>
-            <div id="right-table">
-                <h2>Class 6BD</h2>
-                <table>
-                    <tr>
-                        <td>Position</td>
-                        <td>Name</td>
-                        <td>Class</td>
-                        <td>Total Achievements</td>
-                    </tr>
-                
-                <?php
 
-                $counter = 0;
-                for ($i = count($achievementDataKeys4)-1; $i > -1; $i--) {
-                    $counter+= 1;
-                    if ($counter > 20) {
-                        break;
-                    }
-                    $childID=$achievementDataKeys4[$i];
+                    $counter = 0;
+                    for ($i = count($achievementDataKeys3)-1; $i > -1; $i--) {
+                        $counter+= 1;
+                        if ($counter > 20) {
+                            break;
+                        }
+                        $childID=$achievementDataKeys3[$i];
 
-                    $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
+                        $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
 
-                    if ($childData-> rowCount()==1 ) {
-                        $child = $childData-> fetchObject();
-                        $childName = $child-> First_Name;
-                        $childClass = $child-> Class;
-                        $childCount = $achievementData4[$childID];
+                        if ($childData-> rowCount()==1 ) {
+                            $child = $childData-> fetchObject();
+                            $childName = $child-> First_Name;
+                            $childClass = $child-> Class;
+                            if($counter == 1) {
+                                $childCount = $achievementData[$childID] . "🥇";
+                            } else if ($counter == 2) {
+                                $childCount = $achievementData[$childID] . "🥈";
+                            } else if ($counter == 3) {
+                                $childCount = $achievementData[$childID] . "🥉";
+                            } else {
+                                $childCount = $achievementData[$childID] . "⭐";
+                            }
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo count($achievementDataKeys3)-$i ?></td>
+                            <td><?php echo $childName ?></td>
+                            <td><?php echo $childClass ?></td>
+                            <td><?php echo $childCount ?></td>
+                        </tr>
+
+                        <?php
                     }
                     ?>
-                    <tr>
-                        <td><?php echo count($achievementDataKeys4)-$i ?></td>
-                        <td><?php echo $childName ?></td>
-                        <td><?php echo $childClass ?></td>
-                        <td><?php echo $childCount ?></td>
-                    </tr>
-
+                    </table>
+                </div>
+                <div id="right-table">
+                    <h2>Class 6BD</h2>
+                    <table>
+                        <tr>
+                            <td>Position</td>
+                            <td>Name</td>
+                            <td>Class</td>
+                            <td>Total Achievements</td>
+                        </tr>
+                    
                     <?php
-                }
-                ?>
-                </table>
+
+                    $counter = 0;
+                    for ($i = count($achievementDataKeys4)-1; $i > -1; $i--) {
+                        $counter+= 1;
+                        if ($counter > 20) {
+                            break;
+                        }
+                        $childID=$achievementDataKeys4[$i];
+
+                        $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
+
+                        if ($childData-> rowCount()==1 ) {
+                            $child = $childData-> fetchObject();
+                            $childName = $child-> First_Name;
+                            $childClass = $child-> Class;
+                            if($counter == 1) {
+                                $childCount = $achievementData[$childID] . "🥇";
+                            } else if ($counter == 2) {
+                                $childCount = $achievementData[$childID] . "🥈";
+                            } else if ($counter == 3) {
+                                $childCount = $achievementData[$childID] . "🥉";
+                            } else {
+                                $childCount = $achievementData[$childID] . "⭐";
+                            }
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo count($achievementDataKeys4)-$i ?></td>
+                            <td><?php echo $childName ?></td>
+                            <td><?php echo $childClass ?></td>
+                            <td><?php echo $childCount ?></td>
+                        </tr>
+
+                        <?php
+                    }
+                    ?>
+                    </table>
+                </div>
             </div>
         </div>
     <?php

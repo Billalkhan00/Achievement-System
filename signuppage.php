@@ -19,7 +19,8 @@
     <?php
     include("php/header.php")
     ?>
-    <form action="php/signupscript.php" method= "POST">
+    <form id="loginForm" action="loginselection.php" method="GET"></form>
+    <form id="mainForm" action="php/signupscript.php" method= "POST">
         <div id="form-container">
             <h1>Teacher Signup</h1>
             <label for="first_name">First Name</label>
@@ -43,7 +44,7 @@
 
 
             <input type="submit" name="submit" value="Signup">
-            <a href="#">Login</a>
+            <input form="loginForm" value="Login" type="submit">
         </div>
     </form>
     <?php

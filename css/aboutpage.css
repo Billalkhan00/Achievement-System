@@ -55,17 +55,7 @@
     font-size: 25px;
 }
 
-#topAchiever p {
-    font-size: 30px;
-}
-
-#loginContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-#loginContainer a {
+#bottomContainer a {
     padding: 30px;
     width: 200px;
     display: block;
@@ -78,24 +68,11 @@
     text-decoration: none;
     font-size: 20px;
     height: 20px;
-}
-
-#topAchiever #titleAchiever{
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-#topAchiever #imageAchiever{
-    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-
-#topAchiever #imageAchiever img {
-    height: 80%;
-    width: 80%;
-    object-fit: cover;
-    margin-bottom: 40px;
+#bottomContainer a p{
+    margin-left: 10px;   
 }

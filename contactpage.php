@@ -18,8 +18,10 @@
             <div id="innerContainer">
                 <div id="topContainer">
                     <div id="leftContainer">
-                        <h1>High Achievers the place to reward students in a competitive Manner </h1>
-                        <p>At High Achievers we pride ourselves in making learning competitive and engaging for students through the use of achievements with an up to date leader board. We also allow parents to be able to engage in there child's learning and seeing the progress which has been made! </p>
+                        <h1>Contact Us</h1>
+                        <p>If you would like to contact us, please send us an email at: <a href="#">highachievers@school.ac.uk</a></p>
+                        <p>If you have any issues or enquiries please feel free to contact us, we will respond as fast as we can.</p>
+                        <p>Alternatively you can stay up to date using our social media links below.</p>
                     </div>
                     <div id="rightContainer">
                         <img src="images/trophy.png" width="500px" height="500px">
