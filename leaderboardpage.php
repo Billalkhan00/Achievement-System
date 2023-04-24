@@ -16,9 +16,11 @@
 
         include("php/database.php");
 
+        // get child accounts
         $childrenData = $conn -> query("SELECT * FROM child_account");
         $children = $childrenData->fetchAll();
 
+        // get all childrens achievements
         $achievementData = array();
         for ($i = 0; $i< count($children); $i++) {
             $childID = $children[$i]["ChildID"];
@@ -32,6 +34,7 @@
             }
         }
 
+        // sort children by achievements
         asort($achievementData);
         $achievementDataKeys = array_keys($achievementData);
 
@@ -53,16 +56,18 @@
                     </tr>
                 <?php
 
-
+                // check if user has set sort
                 if (isset($_GET["sort"])) {
                     $sortType = $_GET["sort"];
                 
+                    // show achievements leaderboard by most achievements
                     if ($sortType == "most") {
                         $counter = 0;
                         for ($i = count($achievementDataKeys)-1; $i >-1 ; $i--) {
                             $childID=$achievementDataKeys[$i];
                             $counter += 1;
 
+                            // get child info
                             $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
                 
                             if ($childData-> rowCount()==1 ) {
@@ -80,6 +85,7 @@
                                 }
                             }
                             ?>
+                            <!-- display child in leaderboard table -->
                             <tr>
                                 <td><?php echo count($achievementData)-$i ?></td>
                                 <td><?php echo $childName ?></td>
@@ -95,6 +101,7 @@
                             $childID=$achievementDataKeys[$i];
                             $counter += 1;
 
+                            // get child info
                             $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
                 
                             if ($childData-> rowCount()==1 ) {
@@ -112,6 +119,7 @@
                                 }
                             }
                             ?>
+                            <!-- display child in leaderboard table -->
                             <tr>
                                 <td><?php echo $i+1 ?></td>
                                 <td><?php echo $childName ?></td>
@@ -130,6 +138,7 @@
                     for ($i = count($achievementDataKeys)-1; $i >-1 ; $i--) {
                         $childID=$achievementDataKeys[$i];
                         $counter+=1;
+                        // get child info
                         $childData = $conn -> query("SELECT * FROM child_account WHERE ChildID=$childID");
             
                         if ($childData-> rowCount()==1 ) {
@@ -147,6 +156,7 @@
                             }
                         }
                         ?>
+                        <!-- display child in leaderboard table -->
                         <tr>
                             <td><?php echo count($achievementData)-$i ?></td>
                             <td><?php echo $childName ?></td>

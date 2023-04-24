@@ -21,6 +21,7 @@
     <h1>Add Parent</h1>
     <?php
     include "php/database.php";
+    // check if student id is set
     if (isset($_GET["student"])==FALSE){
         header("location:index.php");
         exit();
@@ -28,11 +29,13 @@
 
     $studentID = $_GET["student"];
 
+    // check if user is logged in
     if (isset($_SESSION["user"])==FALSE){
         header("location:index.php");
         exit();
     }
 
+    // get student info
     $student = $conn -> query ("SELECT * FROM child_account WHERE ChildID = $studentID");
     $studentData = $student-> fetchObject();
     

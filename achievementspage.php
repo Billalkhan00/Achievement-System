@@ -22,11 +22,26 @@
                         <?php
                         include "php/database.php";
 
+                        // get all achievements
                         $sql = "SELECT * FROM achievements";
                         $achievementsData = $conn -> query($sql);
                         $achievements = $achievementsData-> fetchAll();
 
-                        for ($i = 0; $i < count($achievements); $i++){ 
+                        // if teacher is logged in then show add achievement box
+                        if (isset($_SESSION["user"])) {
+                            if ($_SESSION["user"]->accountType=='teacher') {
+                                ?>
+                                <form action="php/addnewachievement.php" method="post">
+                                    <h2>Add Achievement</h2>
+                                    <input type="text" name="reason" placeholder="Enter reason">
+                                    <input type="submit" value="Add">
+                                </form>
+                                <?php
+                            }
+                        }
+
+                        // display all achievements
+                        for ($i = count($achievements)-1; $i >-1; $i--){ 
                         ?>
                             <p><?php echo $achievements[$i]["Reason"] ?></p>
                         <?php

@@ -28,6 +28,7 @@
                 <div id="bottomContainerm">
                     <div id="loginContainer">
                         <?php
+                        // check if user is logged in
                         if (isset($_SESSION["user"]) == FALSE) {
                             ?>
                             <a href="loginselection.php">Login</a>

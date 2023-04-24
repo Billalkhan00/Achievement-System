@@ -21,6 +21,7 @@
     ?>
     <?php
     include "php/database.php";
+    // check if user is logged in
     if (isset($_SESSION["user"])==FALSE){
         header("location: studentloginpage.php");
         exit();
@@ -31,6 +32,7 @@
     <h1 id="title">Student Homepage</h1>
     <div id="mainContainer">
         <div id="infoContainer">
+            <!-- show students personal info -->
             <h2>Personal Information</h2>
             <p>Name: <?php echo $user ->First_Name . " " . $user -> Last_Name ?></p>
             <p>Email: <?php echo $user ->Email_Address?> </p>
@@ -40,9 +42,11 @@
             <h2>Achievements:</h2>
 
             <?php
+            // get students achievements
             $achievements = $conn -> query("SELECT a.* FROM achievements AS a INNER JOIN child_achievements AS ca ON ca.ChildID = $userID AND ca.AchievementID=a.AchievementID");
             $achievementsData = $achievements->fetchAll();
             
+            // sort achievements
             $achievementsList = array();
             for ($i = 0; $i < count($achievementsData); $i++) {
                 array_push($achievementsList, $achievementsData[$i]["AchievementID"]);
@@ -50,6 +54,7 @@
             $countedList = array_count_values($achievementsList);
             $countedListKeys = array_keys($countedList);
             
+            // count duplicate achievements
             for($i = 0; $i< count($countedList); $i++) {
 
                 $id = $countedListKeys[$i];
@@ -67,13 +72,14 @@
             <br>
             <h2>Parents Details:</h2>
             <?php
+            // get parents info
             $parent = $conn -> query("SELECT p.* FROM parent_account AS p INNER JOIN parent_of_child AS pc ON p.ParentID=pc.ParentID AND pc.ChildID=$userID");
             if ($parent-> rowCount() > 0) {
                 $parentsData = $parent-> fetchAll();
             } else {
                 $parentsData = array();
             }
-
+            // display parents info
             for($i = 0; $i < count($parentsData); $i++) {
                 ?>
                 <p>First Name: <?php echo $parentsData[$i]["First_Name"] ?></p>
@@ -84,6 +90,7 @@
 
             include("php/database.php");
 
+            // get childs leaderboard data
                 $childrenData = $conn -> query("SELECT * FROM child_account");
                 $children = $childrenData->fetchAll();
 
@@ -126,6 +133,7 @@
                 <?php
 
                 $counter = 0;
+                // show childs leaderboard
                     for ($i = $start; $i >-1; $i--) {
                         $counter+=1;
                         if ($counter > 10) {
