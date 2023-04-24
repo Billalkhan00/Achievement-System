@@ -21,9 +21,11 @@
 
     include("php/database.php");
 
+        //get child data for leaderboard 
         $childrenData = $conn -> query("SELECT * FROM child_account");
         $children = $childrenData->fetchAll();
 
+        // get childs achivements
         $achievementData = array();
         for ($i = 0; $i< count($children); $i++) {
             $childID = $children[$i]["ChildID"];
@@ -40,7 +42,7 @@
         asort($achievementData);
         $achievementDataKeys = array_keys($achievementData);
 
-        //
+        // sort leaderboards by class
         $achievementData2 = array();
         for ($i = 0; $i< count($children); $i++) {
             $childID = $children[$i]["ChildID"];
@@ -64,6 +66,7 @@
             }
         }
 
+        // sort leaderboards by class
         asort($achievementData2);
         $achievementDataKeys2 = array_keys($achievementData2);
        
@@ -91,6 +94,7 @@
             }
         }
 
+        // sort leaderboards by class
         asort($achievementData3);
         $achievementDataKeys3 = array_keys($achievementData3);
 
@@ -151,6 +155,7 @@
                     <?php
 
             $counter = 0;
+                    // show leaderboard of most achievements
                     for ($i = count($achievementDataKeys)-1; $i >-1 ; $i--) {
                         $counter+= 1;
                         if ($counter > 20) {
@@ -200,6 +205,7 @@
                     <?php
 
                     $counter = 0;
+                    // show leaderboard of least achievements
                     for ($i = 0; $i < count($achievementDataKeys) ; $i++) {
                         $counter+= 1;
                         if ($counter > 20) {
@@ -214,11 +220,11 @@
                             $childName = $child-> First_Name;
                             $childClass = $child-> Class;
                             if($counter == 1) {
-                                $childCount = $achievementData[$childID] . "🥇";
+                                $childCount = $achievementData[$childID] . "⭐";
                             } else if ($counter == 2) {
-                                $childCount = $achievementData[$childID] . "🥈";
+                                $childCount = $achievementData[$childID] . "⭐";
                             } else if ($counter == 3) {
-                                $childCount = $achievementData[$childID] . "🥉";
+                                $childCount = $achievementData[$childID] . "⭐";
                             } else {
                                 $childCount = $achievementData[$childID] . "⭐";
                             }
@@ -249,6 +255,7 @@
                     <?php
 
                     $counter = 0;
+                    // show leaderboard for class 6KH
                     for ($i = count($achievementDataKeys2)-1; $i > -1; $i--) {
                         $counter+= 1;
                         if ($counter > 20) {
@@ -298,6 +305,7 @@
                     <?php
 
                     $counter = 0;
+                    // show leaderboard for class 6RS
                     for ($i = count($achievementDataKeys3)-1; $i > -1; $i--) {
                         $counter+= 1;
                         if ($counter > 20) {
@@ -347,6 +355,7 @@
                     <?php
 
                     $counter = 0;
+                    // show leaderboard for class 6BD
                     for ($i = count($achievementDataKeys4)-1; $i > -1; $i--) {
                         $counter+= 1;
                         if ($counter > 20) {

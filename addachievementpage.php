@@ -21,6 +21,7 @@
     <h1>Student Search Result</h1>
     <?php
     include "php/database.php";
+    // check if student id is set
     if (isset($_GET["student"])==FALSE){
         header("location:index.php");
         exit();
@@ -28,11 +29,13 @@
 
     $studentID = $_GET["student"];
 
+    // check if user is logged in
     if (isset($_SESSION["user"])==FALSE){
         header("location:index.php");
         exit();
     } 
 
+    // get all achievements
     $achievements = $conn -> query ("SELECT * FROM achievements");
     $achievementsData = $achievements -> fetchAll();
 
@@ -40,6 +43,7 @@
     <form method="POST" action="php/giveachievementscript.php">
     <select name="achievementID" id="achievementID">
     <?php
+    // add all achievements to dropdown
     for ($i = 0; $i < count($achievementsData); $i++) {
         $a = $achievementsData[$i];
         $aID = $a ["AchievementID"];	

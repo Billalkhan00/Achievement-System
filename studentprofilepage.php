@@ -21,18 +21,20 @@
     ?>
     <?php
     include "php/database.php";
+    // check if student id is set
     if (isset($_GET["student"])==FALSE){
         header("location:index.php");
         exit();
     }
 
     $studentID = $_GET["student"];
-
+// check if user is logged in
     if (isset($_SESSION["user"])==FALSE){
         header("location:index.php");
         exit();
     }
 
+    // get student information
     $student = $conn -> query ("SELECT * FROM child_account WHERE ChildID = $studentID");
 
     if ($student->rowCount() == 1) {
@@ -46,6 +48,7 @@
         <h1 id="title">Student Profile Page</h1>
         <div id="mainContainer">
             <div id="infoContainer">
+                <!-- display student info -->
                 <h2>Student Details:</h2>
                 <p>First Name: <?php echo $studentname ?></p>
                 <p>Last Name: <?php echo $studentlastname ?></p>
@@ -56,6 +59,7 @@
                 <h2>Add Achievement</h2>
                 <?php
 
+                // get all achievements
                 $achievements = $conn -> query ("SELECT * FROM achievements");
                 $achievementsData = $achievements -> fetchAll();
 
@@ -63,6 +67,7 @@
                 <form method="POST" action="php/giveachievementscript.php">
                 <select name="achievementID" id="achievementID">
                 <?php
+                // add student achievements to dropdown
                 for ($i = 0; $i < count($achievementsData); $i++) {
                     $a = $achievementsData[$i];
                     $aID = $a ["AchievementID"];	
@@ -80,6 +85,7 @@
 
 
                 <br>
+                <!-- display students achievements -->
                 <h2>Achievements:</h2>
                 <?php
             } else {
@@ -87,9 +93,11 @@
                 exit();
             }
 
+            // get students acheivements
             $achievements = $conn -> query("SELECT a.* FROM achievements AS a INNER JOIN child_achievements AS ca ON ca.ChildID = $studentID AND ca.AchievementID=a.AchievementID");
             $achievementsData = $achievements->fetchAll();
             
+            // sort achievements
             $achievementsList = array();
             for ($i = 0; $i < count($achievementsData); $i++) {
                 array_push($achievementsList, $achievementsData[$i]["AchievementID"]);
@@ -97,6 +105,7 @@
             $countedList = array_count_values($achievementsList);
             $countedListKeys = array_keys($countedList);
             
+            // count duplicate achievements
             for($i = 0; $i< count($countedList); $i++) {
 
                 $id = $countedListKeys[$i];
@@ -113,8 +122,10 @@
         ?>
 
         <br>
+        <!-- display parents info -->
             <h2>Parents Details:</h2>
             <?php
+            // get parent info
             $parent = $conn -> query("SELECT p.* FROM parent_account AS p INNER JOIN parent_of_child AS pc ON p.ParentID=pc.ParentID AND pc.ChildID=$studentID");
             if ($parent-> rowCount() > 0) {
                 $parentsData = $parent-> fetchAll();
@@ -122,6 +133,7 @@
                 $parentsData = array();
             }
 
+            // display parent info
             for($i = 0; $i < count($parentsData); $i++) {
                 $parentID = $parentsData[$i]["ParentID"];
                 ?>
@@ -131,11 +143,13 @@
                 <?php
             }
 
+            // if child has parent then show remove
             if ($parent-> rowCount() > 0) {
                 ?>
                 <a href = "php/removeparentscript.php?childID=<?php echo $studentID ?>&parentID=<?php echo $parentID?>">Remove Parent</a>
                 <?php
             } else {
+                // else show add parent box
                 ?>
                 <p>Add Parent Account:</p>
                 <form action="php/addparentscript.php" method="post">

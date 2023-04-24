@@ -20,6 +20,14 @@
     padding: 30px;
     width: 500px;
 }
+#searchInnerContainer form{
+    display: flex;
+}
+#searchInnerContainer input[type=search]{
+    width: 100%;
+    margin-right: 10px;
+}
+
 table {
     border: solid 2px black;
     width: 100%;

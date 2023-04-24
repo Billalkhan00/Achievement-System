@@ -28,14 +28,17 @@
             </tr>
         <?php
         include "php/database.php";
+        // check if name and class is set
         if (isset($_GET["name"])==FALSE && isset($_GET["class"])==FALSE){
             header("location:teacherdashboard.php");
             exit();
         }
+        // check if name and class are not empty
         if (empty($_GET["name"])==TRUE && empty($_GET["class"])==TRUE){
             header("location:teacherdashboard.php");
             exit();
         }
+        // check if user is logged in
         $studentName = $_GET["name"];
         $className = $_GET["class"];
         if (isset($_SESSION["user"])==FALSE){
@@ -43,18 +46,22 @@
             exit();
         }
         $userID = $_SESSION ["user"] -> TeacherID; 
+        // if student name is empty then search class
         if (empty($studentName) == true) {
             $students = $conn -> query ("SELECT * FROM child_account WHERE Class LIKE '%$className%'");
         } else {
+            // otherwise seach student first name and lastname
             $studentNameList = explode(" ", $studentName);
             if (count($studentNameList) > 1) {
                 $firstName = $studentNameList[0];
                 $lastName = $studentNameList[1];
                 $students = $conn -> query ("SELECT * FROM child_account WHERE First_Name LIKE '%$firstName%' OR Last_Name LIKE '%$lastName%'");
             } else {
+                // else search student 
                 $students = $conn -> query ("SELECT * FROM child_account WHERE First_Name LIKE '%$studentName%' OR Last_Name LIKE '%$studentName%'");
             }
         }
+        // display students results in table
         $students = $students -> fetchAll();
         for ($i=0;$i<count($students) ;$i++){
             $student = $students[$i];

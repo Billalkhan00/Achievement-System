@@ -11,8 +11,10 @@
     <div id = "header-buttons">
         <?php
         session_start();
+        // check if user is logged in
         if (isset ($_SESSION['user'])){
             if ($_SESSION['user']->accountType=='parent'){
+                // if user is a parent
                 ?>
                 <a href="index.php">Home</a>
                 <a href="aboutpage.php">About</a>
@@ -22,6 +24,7 @@
                 <a href="php/logout.php">Logout</a>
             <?php
             }else if ($_SESSION['user']->accountType=='teacher'){
+                // if user is a teacher
                 ?>
                 <a href="index.php">Home</a>
                 <a href="aboutpage.php">About</a>
@@ -32,6 +35,7 @@
                 <a href="php/logout.php">Logout</a>
                 <?php
             }else if ($_SESSION['user']->accountType=='student'){
+                // if user is a student
                 ?>
                 <a href="index.php">Home</a>
                 <a href="aboutpage.php">About</a>
@@ -43,6 +47,7 @@
                 <?php 
             }
         }  else {
+            // if the user is not logged in
             ?>
             <a href="index.php">Home</a>
             <a href="aboutpage.php">About</a>

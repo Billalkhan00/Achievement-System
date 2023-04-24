@@ -23,16 +23,21 @@
             <h1 id="title">Child Account</h1>
             <?php
             include "php/database.php";
+            // check if user is logged in
             if (isset($_SESSION["user"])==FALSE){
                 header("location: studentloginpage.php");
                 exit();
             }
             
+            // get child account
             $userID = $_SESSION ["user"] -> ParentID; 
             $childaccount = $conn -> query("SELECT c.* FROM child_account AS c INNER JOIN parent_of_child AS pc ON c.ChildID=pc.ChildID AND pc.ParentID=$userID");
 
+            // check if user has a child linked
             if ($childaccount-> rowCount() >0) {
                 $childData = $childaccount ->fetchObject();
+                
+                // show childs personal information
                 ?>
                 <h2>Personal Information</h2>
                 <p>Name: <?php echo $childData ->First_Name . " " . $childData -> Last_Name ?></p>
@@ -43,7 +48,8 @@
                 <h2>Achievements:</h2>
 
                 <?php
-                $achievements = $conn -> query("SELECT a.* FROM achievements AS a INNER JOIN child_achievements AS ca ON ca.ChildID = $userID AND ca.AchievementID=a.AchievementID");
+                // get childs achievements
+                $achievements = $conn -> query("SELECT a.* FROM achievements AS a INNER JOIN child_achievements AS ca ON ca.ChildID = $childData->ChildID AND ca.AchievementID=a.AchievementID");
                 $achievementsData = $achievements->fetchAll();
                 
                 $achievementsList = array();
@@ -53,6 +59,7 @@
                 $countedList = array_count_values($achievementsList);
                 $countedListKeys = array_keys($countedList);
                 
+                // count duplicate achievements
                 for($i = 0; $i< count($countedList); $i++) {
 
                     $id = $countedListKeys[$i];
@@ -62,22 +69,26 @@
                         $reason = $a->Reason;
                         $count = $countedList[$id];
                     }
+                    // display achievement
                     ?>
                     <p><?php echo $reason . " x" .$count?></p>
                     <?php
                 }
                 ?>
                 <br>
+                <!-- parents information -->
                 <h2>Parents Details:</h2>
                 <p>First Name: <?php echo $_SESSION["user"]->First_Name ?></p>
                 <p>Last Name: <?php echo $_SESSION["user"]->Last_Name ?></p>
                 <p>Email: <?php echo $_SESSION["user"]->Email_Address ?></p>
                 <?php
 
+                // get childs achivements for leaderboard
                 $achievementData = array();
                 $childID = $childData->ChildID;
                 $childAchievements = $conn -> query("SELECT ChildID, count(AchievementID) AS total FROM child_achievements WHERE ChildID=$childID HAVING COUNT(AchievementID) >= 1");
                 
+                // get achievements
                 if ($childAchievements -> rowCount() > 0) {
                     $childAchievementData = $childAchievements -> fetchObject();
                     $achievementData[$childID] = $childAchievementData->total;          
@@ -85,6 +96,7 @@
                     $achievementData[$childID] = 0;
                 }
 
+                // sort achievements
                 asort($achievementData);
                 $achievementDataKeys = array_keys($achievementData);
 
@@ -108,6 +120,7 @@
                     </tr>
                 <?php
                 $counter = 0;
+                    // display childs leaderboard 
                     for ($i = $start; $i >-1; $i--) {
                         $counter+=1;
                         if ($counter > 1) {
@@ -142,6 +155,7 @@
                 </table>
                 <?php
             } else {
+                // if there is no child linked
                 ?>
                 <p>No child linked</p>
                 <?php
